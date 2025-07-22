@@ -19,13 +19,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import io.github.dwivedyaakash.rickandmortyapp.Screens
 import io.github.dwivedyaakash.rickandmortyapp.ui.components.CharacterCard
 import io.github.dwivedyaakash.rickandmortyapp.ui.theme.Background
 import io.github.dwivedyaakash.rickandmortyapp.ui.theme.Title
 import io.github.dwivedyaakash.rickandmortyapp.viewModel.RickAndMortyViewModel
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(navController: NavHostController) {
     val viewModel = remember { RickAndMortyViewModel() }
     val charactersData by viewModel.charactersData.observeAsState()
 
@@ -33,7 +35,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
     viewModel.getCharactersData()
 
     Column(
-        modifier
+        modifier = Modifier
             .fillMaxSize()
             .background(Background)
             .padding(vertical = 10.dp)
@@ -56,7 +58,11 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         ) {
             charactersData?.results?.forEach {
                 item {
-                    CharacterCard(it)
+                    CharacterCard(
+                        it,
+                        showDetails = false,
+                        onClick = { navController.navigate(Screens.CharacterDetailScreen.name + "/${it.id}") }
+                    )
                 }
             }
         }

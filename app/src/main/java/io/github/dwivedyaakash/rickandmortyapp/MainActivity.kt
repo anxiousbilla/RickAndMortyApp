@@ -18,7 +18,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             RickAndMortyAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    HomeScreen(modifier = Modifier.padding(innerPadding))
+                    Navigation(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
