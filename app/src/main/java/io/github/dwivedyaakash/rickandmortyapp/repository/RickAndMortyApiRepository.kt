@@ -8,8 +8,8 @@ import retrofit2.Response
 class RickAndMortyApiRepository {
     private val rickAndMortyApiService = RetrofitInstance.rickAndMortyApiService
 
-    suspend fun getCharacters(): Response<CharacterResponse> {
-        return rickAndMortyApiService.getCharacters()
+    suspend fun getCharacters(page: Int): Response<CharacterResponse> {
+        return rickAndMortyApiService.getCharacters(page)
     }
 
     suspend fun getCharacterById(id: Int): Response<Character> {

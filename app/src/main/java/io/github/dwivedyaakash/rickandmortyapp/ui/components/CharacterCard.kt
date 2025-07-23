@@ -13,12 +13,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign.Companion.Center
 import androidx.compose.ui.text.style.TextAlign.Companion.Start
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import io.github.dwivedyaakash.rickandmortyapp.R
 import io.github.dwivedyaakash.rickandmortyapp.model.Character
 import io.github.dwivedyaakash.rickandmortyapp.ui.theme.Border
 import io.github.dwivedyaakash.rickandmortyapp.ui.theme.CardBackground
@@ -50,7 +52,8 @@ fun CharacterCard(character: Character, showDetails: Boolean, onClick: () -> Uni
                 .clip(shape = RoundedCornerShape(8.dp)),
             model = character.image,
             contentDescription = character.name,
-            contentScale = ContentScale.FillWidth
+            contentScale = ContentScale.FillWidth,
+            placeholder = painterResource(R.drawable.placeholder_image)
         )
         Text(
             modifier = Modifier
