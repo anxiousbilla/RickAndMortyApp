@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.github.dwivedyaakash.rickandmortyapp.model.Character
 import io.github.dwivedyaakash.rickandmortyapp.repository.RickAndMortyApiRepository
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -40,6 +41,8 @@ class RickAndMortyViewModel : ViewModel() {
             try {
                 val response = repository.getCharacters(currentState.currentPage)
                 if (response.isSuccessful) {
+                    // for demonstration purpose, added a 1 second delay, to let the shimmer show as api response comes very quickly
+                    delay(1000)
                     _uiState.value =
                         currentState.copy(characters = currentState.characters + response.body()?.results!!)
                 } else {

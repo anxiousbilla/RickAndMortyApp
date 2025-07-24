@@ -78,23 +78,40 @@ fun HomeScreen(navController: NavHostController) {
                     textAlign = TextAlign.Center
                 )
             }
+            // Shimmer
+            if (charactersData.isEmpty()) {
+                for (i in 1..6) {
+                    item {
+                        CharacterCard(
+                            character = null,
+                            showDetails = false,
+                            onClick = {}
+                        )
+                    }
+                }
+            }
             charactersData.forEach {
                 item {
                     CharacterCard(
-                        it,
+                        character = it,
                         showDetails = false,
                         onClick = { navController.navigate(Screens.CharacterDetailScreen.name + "/${it.id}") }
                     )
                 }
             }
             item(span = { GridItemSpan(maxLineSpan) }) {
-                Box(modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(20.dp), contentAlignment = Center) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(30.dp),
-                        color = Color(0xFFEEEEEE)
-                    )
+                if (charactersData.isNotEmpty()) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(20.dp),
+                        contentAlignment = Center
+                    ) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(30.dp),
+                            color = Color(0xFFEEEEEE)
+                        )
+                    }
                 }
             }
         }
